@@ -1,26 +1,18 @@
 class Enumerable {
-  public static count<T extends any[]>(items: T): number {
-    return items.length;
+  public static count(items: any[]): number {
+    let count = 0;
+    for (const item in items) {
+      if (items[item] !== undefined) {
+        count++;
+      }
+    }
+    return count;
   }
 }
 
-const books = [
-  {
-    category: 'Science fiction', subCategory: 'Humour', books: [
-      {name: "Hitchhikers Guide To The Galaxy", language: "English", "pageCount": 142},
-      {name: "The Stainless Steel Rat Anthology", language: "English", "pageCount": 468},
-      {name: "Hitchhikers Guide To The Galaxy", language: "French", pageCount: 220}
-    ]
-  },
-  {
-    category: 'Science fiction', subCategory: 'Classic', books: [
-      { name: "Foundation and Empire", language: "English", "pageCount": 225}
-    ]
-  },
-  {
-    category: 'Technical', subCategory: 'Programming Books', books: [
-      {name: "Advanced TypeScript Programming Projects", language: "German", "pageCount": 420}
-  ]
-}]
+const board = [10, 20, , 30, 41];
 
-console.log(Enumerable.count(books.filter(book => book.category === 'Science fiction' && book.books.map(inner => inner.language === 'English'))));
+console.log('*** The length is');
+console.log(board.length);
+console.log('*** The count is')
+console.log(Enumerable.count(board));
