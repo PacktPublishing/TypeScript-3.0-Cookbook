@@ -39,17 +39,14 @@ class SimpleSortSample implements Comparer<Comparable<SimpleClass>> {
       return 0;
     });
     */
-    let sortOrder = this.sortCase.slice(0);
+    let sortOrder: SimpleClass[] = this.sortCase.slice(0);
     if (this.comparisonObject === null) {
-      sortOrder = this.sortCase.sort();
+      sortOrder = sortOrder.sort();
     } else {
       sortOrder = this.sortCase.slice(0).sort((cmp1: SimpleClass, cmp2: SimpleClass) => {
         return this.comparisonObject!.compare(cmp1, cmp2);
       });
     }
-    console.log(`-- Unsorted list`);
-    console.log(this.sortCase);
-    console.log(`-- Sorted list`);
     console.log(sortOrder);
   }
 
@@ -68,6 +65,7 @@ class SortComparable implements Comparable<SimpleClass> {
 }
 
 const simple: SimpleSortSample = new SimpleSortSample();
+console.log('*** Default sort');
 simple.sort();
 console.log('*** Logging with comparer');
 simple.setComparer(new SortComparable());
