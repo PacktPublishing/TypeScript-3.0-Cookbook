@@ -1,9 +1,9 @@
 const books = [
   {
     category: 'Science fiction', subCategory: 'Humour', books: [
-      {name: "Hitchhikers Guide To The Galaxy", language: "English", "pageCount": 142},
+      {name: "The Hitchhiker's Guide To The Galaxy", language: "English", "pageCount": 142},
       {name: "The Stainless Steel Rat Anthology", language: "English", "pageCount": 468},
-      {name: "Hitchhikers Guide To The Galaxy", language: "French", pageCount: 220}
+      {name: "The Hitchhiker's Guide To The Galaxy", language: "French", pageCount: 220}
     ]
   },
   {
