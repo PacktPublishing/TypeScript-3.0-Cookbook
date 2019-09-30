@@ -32,6 +32,6 @@ class Sort {
   }
 }
 
-const array: number[] = [10, 80, 40, 3, 139, 18, 12, 52, 90]
+const array: number[] = [10, 139, 40, 3, 80, 18, 12, 52, 90]
 Sort.quickSort(array);
 console.log(array);
