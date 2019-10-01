@@ -1,11 +1,11 @@
 class TrieNode {
-  constructor(public key: string | null, 
+  constructor(public key: string, 
     public leaf: boolean = false, 
     public children: Map<string, TrieNode> = new Map<string, TrieNode>()) { }
 }
 
 class Trie {
-  private root: TrieNode = new TrieNode(null);
+  private root: TrieNode = new TrieNode('Root');
   constructor(...items: string[]) {
     for (const item of items) {
       this.push(item);
@@ -14,23 +14,23 @@ class Trie {
 
   public push(text: string): void {
     let children: Map<string, TrieNode> = this.root.children;
-    let level: number = 0;
+    let index: number = 0;
 
     for (const character of text) {
-      let node;
+      let node: TrieNode | null = null;
       if (children.get(character)) {
-        node = children.get(character);
+        node = children.get(character)!;
       } else {
         node = new TrieNode(character);
         children.set(character, node);
       }
       children = node!.children;
-      if (level === text.length -1) {
+      if (index === text.length -1) {
         node!.leaf = true;
       } else {
         node!.leaf = false;
       }
-      ++level;
+      ++index;
     }
   }
 
@@ -57,4 +57,4 @@ class Trie {
 }
 
 const trie = new Trie("hello", "help", "item", "helter skelter");
-console.log(trie.find("hello"));
+console.log(trie.find("he")!.children);
