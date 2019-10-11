@@ -1,4 +1,4 @@
-export class KnuthMorrisPratt {
+class KnuthMorrisPratt {
   constructor(private text: string) { }
 
   public search(searchText: string): number[] {
@@ -30,27 +30,25 @@ export class KnuthMorrisPratt {
   private buildTable(word: string): number[] {
     const results:[number, number] = [0, 0];
     let prefix = 2;
-    let cnd = 0;
+    let current = 0;
 
     while (prefix < word.length) {
-        if (word.charAt(prefix - 1) === word.charAt(cnd)) {
-          cnd++;
-          results[prefix] = cnd;
-          prefix++;
-        } else if (cnd === 0) {
-          results[prefix] = 0;
-          prefix++;
-        } else {
-          cnd = results[cnd];
-        }
+      if (word.charAt(prefix - 1) === word.charAt(current)) {
+        current++;
+        results[prefix] = current;
+        prefix++;
+      } else if (current === 0) {
+        results[prefix] = 0;
+        prefix++;
+      } else {
+        current = results[current];
+      }
     }
     return results;
   }
 }
 
 var test = 'abacab';
-
-var string = `abaabbaaabbacagabbahabbahayabacabannabaaakaabaacabaaabacabaabababacababahahabaaahacabaabbaaabbacagabbahabbahayabacabannabaaakaabaacabaaabacabaabababacababahahabaaahacabaabbaaabbacagabbahabbahayabacabannabaaakaabaacabaaabacabaabababacababahahabaaahacabaabbaaabbacagabbahabbahayabacabannabaaakaabaacabaaabacabaabababacababahahabaaahac`;
-
+var string = `abaabbaaabbacagabbahabbahayabacabannabaaakaabaacabaaabacabaabababacababahahabaaahacabaabbaaabbacagabbahabbahayabacabannabaaakaabaacabaaabacabaabababacababahahabaaahacabaabbaaabbacagabbahabbahayabacabannabaaakaabaacabaaabacaba`;
 const result = new KnuthMorrisPratt(string);
 console.log(result.search(test));
