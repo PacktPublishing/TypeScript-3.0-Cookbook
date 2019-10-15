@@ -6,6 +6,19 @@ class Matrix {
 }
 
 class SparseMatrix extends LinkedList<Matrix> {
+  public sumColumns(column: number): number {
+    let result: number = 0;
+    if (this.head === null) {
+      return result;
+    }
+    let node: Node<Matrix> = this.head;
+    while (node !== null) {
+      if (node.data.column === column) result += node.data.value;
+      node = node.next!;
+    }
+    return result;
+  }
+
   public toArray(): (number)[][] | null {
     if (this.head === null) {
       return null;
@@ -50,5 +63,7 @@ function push(row: number, column: number, value: number): Matrix {
 const sparseMatrix = new SparseMatrix();
 sparseMatrix.push(push(4, 3, 33));
 sparseMatrix.push(push(2, 1, 12));
+sparseMatrix.push(push(5, 1, 34));
 
 console.log(sparseMatrix.toArray());
+console.log(`The sum of values in column 1 is ${sparseMatrix.sumColumns(1)}`);
