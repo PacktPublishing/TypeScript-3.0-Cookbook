@@ -70,5 +70,5 @@ binarySearchTree.push(11);
 binarySearchTree.push(20);
 
 console.log(binarySearchTree.tree);
-console.log(binarySearchTree.contains(5));
-console.log(binarySearchTree.contains(4));
+console.log(`binarySearchTree.contains(5) is ${binarySearchTree.contains(5)}`);
+console.log(`binarySearchTree.contains(4) is ${binarySearchTree.contains(4)}`);
