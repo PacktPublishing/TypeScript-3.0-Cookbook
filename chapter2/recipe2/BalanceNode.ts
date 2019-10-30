@@ -2,7 +2,6 @@ import { treeNode } from "./TreeNode";
 export class BalanceNode {
   public balance(node: treeNode): treeNode {
     let balanceFactor = this.getBalance(node);
-    console.log(`Balance factor for ${node!.key} is ${balanceFactor}`);
     if (balanceFactor > 1) {
       balanceFactor = this.getBalance(node!.left);
       if (balanceFactor > 0) {
