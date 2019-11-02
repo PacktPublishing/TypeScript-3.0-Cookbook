@@ -5,7 +5,7 @@ class BinaryTreeSort {
 
   public push(...values: number[]): void {
     values.forEach((value: number) => {
-      this.pushValue(value);
+      this.tree = this.pushNode(this.tree, value);
     });
   }
 
@@ -21,10 +21,6 @@ class BinaryTreeSort {
       sorted.push(node.key);
       this.inorder(node.right, sorted);
     }
-  }
-
-  private pushValue(key: number): void {
-    this.tree = this.pushNode(this.tree, key);
   }
 
   private pushNode(node: treeNode, key: number): TreeNode {

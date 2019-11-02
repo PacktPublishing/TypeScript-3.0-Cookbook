@@ -6,11 +6,7 @@ class BinarySearchTree {
 
   public push(key: number): void {
     const newNode: TreeNode = new TreeNode(key);
-    if (!this.tree) {
-      this.tree = newNode;
-    } else {
-      this.tree = this.insertNode(this.tree, newNode);
-    }
+    this.tree = this.insertNode(this.tree, newNode);
   }
 
   private insertNode(node: treeNode, newNode: TreeNode): treeNode {
@@ -72,3 +68,11 @@ binarySearchTree.push(20);
 console.log(binarySearchTree.tree);
 console.log(`binarySearchTree.contains(5) is ${binarySearchTree.contains(5)}`);
 console.log(`binarySearchTree.contains(4) is ${binarySearchTree.contains(4)}`);
+
+/* To see the effect of the balance, uncomment this code
+binarySearchTree.push(30);
+binarySearchTree.push(40);
+binarySearchTree.push(50);
+
+console.log(binarySearchTree.find(30));
+*/
