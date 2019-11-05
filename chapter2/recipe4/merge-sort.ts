@@ -24,19 +24,14 @@ class Sort {
   
     while (left < leftValues.length && right < rightValues.length) {
       if (leftValues[left] < rightValues[right]) {
-        result.push(leftValues[left]);
-        left++;
+        result.push(leftValues[left++]);
       } else {
-        result.push(rightValues[right]);
-        right++;
+        result.push(rightValues[right++]);
       }
     }
-    const leftResult: number[] = leftValues.slice(left);
-    const rightResult: number[] = rightValues.slice(right);
-  
-    return result.concat(leftResult).concat(rightResult);
+    return result.concat(leftValues.slice(left)).concat(rightValues.slice(right));
   }
 }
 
-const array: number[] = [12, 24, -4, 32, 3, -1, -5, 64, 108, 9, 12, 24, 14];
+const array: number[] = [12, 24, -4, 32, 3, -1, -5, 64, 108, 9, 12, 14];
 console.log(Sort.mergeSort(array));
