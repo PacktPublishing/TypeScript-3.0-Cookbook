@@ -1,9 +1,6 @@
 type Constructor<T = {}> = new (...args: any[]) => T;
-function Bound<TBase extends Constructor>(base: TBase) {
+function Bound<T extends Constructor>(base: T) {
   return class extends base {
-    constructor(...args: any[]) {
-      super(...args);
-    }
     public bindInput<T, K extends keyof T>(obj: T, key: K, row: HTMLTableRowElement, position: number): void {
       const cell = row.insertCell(position);
       const textBox: HTMLInputElement = <HTMLInputElement>(document.createElement('input'));
