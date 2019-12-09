@@ -39,7 +39,6 @@ class TableBind {
 
   private push(table: HTMLTableElement, title: string, firstName: string, lastName: string) {
     const row: HTMLTableRowElement = table.insertRow(0);
-    // How can we apply the bound model in here????
     const boundPerson = new BoundPerson();
     boundPerson.title = title;
     boundPerson.firstName = firstName;
