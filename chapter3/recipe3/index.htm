@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Binding Engine - demo</title>
+    <style>
+      html, body { 
+        height: 100%; 
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: medium;
+      }
+    </style>
+  </head>
+  <body>
+    <select collection="people" />
+    <input type="text" id="firstName" /> <input type="text" id="lastName" />
+    <button onclick="addPerson()">Add</button>
+    <script src="dist/binding-engine.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      const person = new People();
+
+      function addPerson() {
+        const firstName = document.getElementById("firstName");
+        const lastName = document.getElementById("lastName");
+        person.addPerson(firstName.value, lastName.value);
+      }
+    </script>
+  </body>
+</html>

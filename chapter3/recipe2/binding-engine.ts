@@ -36,7 +36,7 @@ class BoundObject<T> {
 
   public attach(subscriber: any): void {
     this.subscribers.push(subscriber);
-    this.notify();
+    subscriber();
   }
 
   public setValue(value: any): void {
@@ -50,7 +50,7 @@ class BoundObject<T> {
   }
   private notify(): void {
     this.subscribers.forEach(subscriber => {
-      subscriber(this.value);
+      subscriber();
     })
   }
 }
