@@ -22,6 +22,8 @@
         const firstName = document.getElementById("firstName");
         const lastName = document.getElementById("lastName");
         person.addPerson(firstName.value, lastName.value);
+        firstName.value = '';
+        lastName.value = '';
       }
     </script>
   </body>
