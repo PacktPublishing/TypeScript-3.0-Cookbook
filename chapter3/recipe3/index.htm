@@ -2,21 +2,49 @@
   <head>
     <title>Binding Engine - demo</title>
     <style>
-      html, body { 
-        height: 100%; 
+      html,
+      body {
+        height: 100%;
         font-family: Arial, Helvetica, sans-serif;
         font-size: medium;
       }
     </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <select collection="people" />
-    <input type="text" id="firstName" /> <input type="text" id="lastName" />
-    <button onclick="addPerson()">Add</button>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <select collection="people"></select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <p>First name</p>
+        </div>
+        <div class="col-md-4">
+          <input type="text" id="firstName" />
+        </div>
+        <div class="col-md-2">
+          <p>Last name</p>
+        </div>
+        <div class="col-md-4">
+          <input type="text" id="lastName" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button onclick="addPerson()">Add</button>
+        </div>
+      </div>
+    </div>
+
     <script src="dist/binding-engine.js" type="text/javascript">
     </script>
     <script type="text/javascript">
-      const person = new People();
+      const person = new PeopleViewModel();
+      person.bind();
 
       function addPerson() {
         const firstName = document.getElementById("firstName");
@@ -26,5 +54,8 @@
         lastName.value = '';
       }
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   </body>
 </html>

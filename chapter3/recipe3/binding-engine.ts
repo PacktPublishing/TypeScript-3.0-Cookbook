@@ -1,32 +1,33 @@
-class BindingBase {
-  public bind(reflect: any) {
-    this.createElement('collection', 'option', reflect);
-  }
-
-  private createElement(selector: string, htmlElement: string, reflect: any): void {
-    document.querySelectorAll(`[${selector}]`).forEach(bind => {
+class Binder {
+  public static bind(bindingObject: any): void {
+    document.querySelectorAll(`[collection]`).forEach(bind => {
       const listElement = bind as HTMLSelectElement;
       if (!listElement) return;
-      const elementName: string | null = listElement.getAttribute(selector);
-      if (elementName !== null && reflect.hasOwnProperty(elementName)) {
-        const element = Reflect.get(reflect, elementName);
-        if (element) {
-          element.attach(() => {
-            while (listElement.firstChild) {
-              listElement.removeChild(listElement.firstChild);
-            }
-            const children = element.collection();
-            if (children) {
-              children.forEach((child: { firstName: string; lastName: string; }) => {
-                const option: HTMLOptionElement = document.createElement(htmlElement) as HTMLOptionElement;
-                option.text = child.firstName + ' ' + child.lastName;
-                listElement.add(option);
-              })
-            }
-          });
-        }
+      const elementName: string | null = listElement.getAttribute('collection');
+      if (elementName !== null && bindingObject.hasOwnProperty(elementName)) {
+        const element = Reflect.get(bindingObject, elementName);
+        Binder.attach(element, listElement);
       }
     })
+  }
+
+  private static attach(element: any, listElement: HTMLSelectElement): void {
+    if (!element) return;
+    element.attach(() => {
+      while (listElement.firstChild) {
+        listElement.removeChild(listElement.firstChild);
+      }
+      Binder.bindItems(element.collection(), listElement);
+    });
+  }
+
+  private static bindItems(children: any, listElement: HTMLSelectElement) {
+    if (!children) return
+    children.forEach((child: any) => {
+      const option: HTMLOptionElement = document.createElement('option') as HTMLOptionElement;
+      option.text = child;
+      listElement.add(option);
+    });
   }
 }
 
@@ -55,7 +56,7 @@ class BoundCollection<T> {
 
   private notify(): void {
     this.subscribers.forEach(subscriber => {
-      subscriber();
+        subscriber();
     })
   }
 }
@@ -63,13 +64,20 @@ class BoundCollection<T> {
 class Person {
   public firstName: string = '';
   public lastName: string = '';
+
+  public toString(): string {
+    return this.firstName + ' ' + this.lastName;
+  }
 }
 
-class People {
-  constructor(public people: BoundCollection<Person> = new BoundCollection<Person>(), private bind: BindingBase = new BindingBase()) {
+class PeopleViewModel {
+  constructor(public people: BoundCollection<Person> = new BoundCollection<Person>()) {
     this.addPerson('Rupam', 'Gaur');
     this.addPerson('Laszlo', 'Poca');
-    this.bind.bind(this);
+  }
+
+  public bind(): void {
+    Binder.bind(this);
   }
 
   private addPerson(firstName: string, lastName: string): void {

@@ -1,11 +1,11 @@
-class BindingBase {
-  public bind(reflect: any): void {
+class Binder {
+  public static bind(bindingObject: any): void {
     document.querySelectorAll(`[twoway-bind]`).forEach(bind => {
       const inputElement: HTMLInputElement = bind as HTMLInputElement;
       if (!inputElement) return;
       const elementName: string | null = inputElement.getAttribute("twoway-bind");
-      if (elementName !== null && reflect.hasOwnProperty(elementName)) {
-        const element = Reflect.get(reflect, elementName);
+      if (elementName !== null && bindingObject.hasOwnProperty(elementName)) {
+        const element = Reflect.get(bindingObject, elementName);
         if (element) {
           element.attach(() => inputElement.value = element.getValue());
           inputElement.addEventListener('change', ()=> {
@@ -18,8 +18,8 @@ class BindingBase {
       const htmlElement: HTMLElement = bind as HTMLElement;
       if (!htmlElement) return;
       const elementName: string | null = htmlElement.getAttribute(`oneway-bind`);
-      if (elementName !== null && reflect.hasOwnProperty(elementName)) {
-        const element = Reflect.get(reflect, elementName);
+      if (elementName !== null && bindingObject.hasOwnProperty(elementName)) {
+        const element = Reflect.get(bindingObject, elementName);
         if (element) {
           element.attach(() => htmlElement.textContent = element.getValue());
         }
@@ -55,21 +55,21 @@ class BoundObject<T> {
   }
 }
 
-class Example {
+class Person {
   public firstName: string = 'Shona';
   public lastName: string = 'Hui';
 }
 
 class ExampleBoundViewModel {
-  constructor(private example: Example = new Example(), private binding: BindingBase = new BindingBase()) {
-    this.firstName.bind(this.example, "firstName");
-    this.lastName.bind(this.example, "lastName");
+  constructor(private person: Person = new Person()) {
+    this.firstName.bind(this.person, "firstName");
+    this.lastName.bind(this.person, "lastName");
   }
 
-  public firstName: BoundObject<Example> = new BoundObject<Example>();
-  public lastName: BoundObject<Example> = new BoundObject<Example>();
+  public firstName: BoundObject<Person> = new BoundObject<Person>();
+  public lastName: BoundObject<Person> = new BoundObject<Person>();
 
   public bind(): void {
-    this.binding.bind(this);
+    Binder.bind(this);
   }    
 }
